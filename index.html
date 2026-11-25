@@ -242,29 +242,24 @@ header.top p.ar{font-size:15.5px;color:var(--fg);opacity:.85}
 @media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
 
 /* ===== fixed header with the power-line scene ===== */
-.topbg{position:fixed;left:0;right:0;top:0;height:var(--topH,180px);z-index:4;pointer-events:none;
-  background:linear-gradient(to bottom,var(--bg) 0%,var(--bg) 82%,color-mix(in srgb,var(--bg) 0%,transparent) 100%)}
+.topbg{position:fixed;left:0;right:0;top:0;height:calc(var(--topH,180px) + 22px);z-index:4;pointer-events:none;
+  background:linear-gradient(to bottom,var(--bg) 0,var(--bg) calc(100% - 22px),color-mix(in srgb,var(--bg) 0%,transparent) 100%)}
 .topbar{position:fixed;left:0;right:0;top:0;z-index:7;pointer-events:none;
   padding:max(12px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 8px max(16px, env(safe-area-inset-left, 0px))}
 .topbar .topin{max-width:720px;margin:0 auto;position:relative}
 .topbar .steps{pointer-events:auto;margin-bottom:0;position:relative;z-index:3}
 .wrap{padding-top:calc(var(--topH,180px) + 12px)!important}
 .scene{position:fixed;left:50%;width:min(100%,780px);transform:translateX(-50%);top:0;height:var(--sceneH,110px);z-index:5;pointer-events:none;overflow:hidden}
-.scene svg{width:100%;height:100%;
-  /* towers stay solid at the edges; cables dim behind the title band and come back below it */
-  -webkit-mask-image:linear-gradient(to right,#000 0,#000 8%,transparent 15%,transparent 85%,#000 92%,#000 100%),linear-gradient(to bottom,rgba(0,0,0,.2) 0,rgba(0,0,0,.2) 58%,#000 80%);
-  -webkit-mask-composite:source-over;
-          mask-image:linear-gradient(to right,#000 0,#000 8%,transparent 15%,transparent 85%,#000 92%,#000 100%),linear-gradient(to bottom,rgba(0,0,0,.2) 0,rgba(0,0,0,.2) 58%,#000 80%);
-          mask-composite:add}
+.scene svg{width:100%;height:100%}
 #bolt{position:fixed;left:0;top:0;z-index:6;pointer-events:none}
-header.top{position:relative;z-index:2;min-height:118px;align-items:flex-start!important;padding-top:2px}
+header.top{position:relative;z-index:2;min-height:118px;align-items:flex-end!important;padding-top:2px}
 header.top h1,header.top p{text-shadow:none}
 .scene.iso{--anatomy-paper:color-mix(in srgb,var(--bg) 88%,#fff);--anatomy-face:color-mix(in srgb,var(--bg) 80%,#fff);--anatomy-top:color-mix(in srgb,var(--bg) 78%,#fff);
   --anatomy-shade-0:color-mix(in srgb,var(--bg) 94%,#fff);--anatomy-shade-1:color-mix(in srgb,var(--bg) 91%,#fff);--anatomy-shade-2:color-mix(in srgb,var(--bg) 88%,#fff);--anatomy-shade-3:color-mix(in srgb,var(--bg) 85%,#fff);
   --anatomy-hi:color-mix(in srgb,var(--fg) 82%,transparent);--anatomy-mid:color-mix(in srgb,var(--fg) 45%,transparent);--anatomy-lo:color-mix(in srgb,var(--fg) 24%,transparent);--anatomy-faint:color-mix(in srgb,var(--fg) 12%,transparent);
   --anatomy-dot:var(--fg);--anatomy-halo:color-mix(in srgb,var(--fg) 60%,transparent);--anatomy-weight:.75px}
 .scene .hv{fill:none;stroke:color-mix(in srgb,var(--fg) 30%,transparent);stroke-width:1px;vector-effect:non-scaling-stroke;transition:stroke .8s,opacity .8s}
-.scene.on .hv{stroke:var(--aqua);opacity:.9;filter:drop-shadow(0 0 2.5px color-mix(in srgb,var(--accent2) 80%,transparent))}
+.scene.on .hv{stroke:var(--aqua);animation:hum 3.2s ease-in-out infinite;filter:drop-shadow(0 0 2.5px color-mix(in srgb,var(--accent2) 80%,transparent))}
 @keyframes hum{0%,100%{opacity:calc(.55 + .35*var(--pw,.5))}50%{opacity:calc(.35 + .3*var(--pw,.5))}}
 .scene .lamp{fill:color-mix(in srgb,var(--fg) 25%,transparent);transition:fill .6s}
 .scene.on .lamp{fill:var(--gold);filter:drop-shadow(0 0 3px var(--accent))}
@@ -274,7 +269,7 @@ header.top h1,header.top p{text-shadow:none}
 @keyframes flick{0%{opacity:.9}15%{opacity:.15}30%{opacity:.7}45%{opacity:.1}60%{opacity:.6}80%{opacity:.25}100%{opacity:.5}}
 .scene.boot .lamp,.scene.boot .bush .iso-edge{animation:boot .9s ease-out 1}
 @keyframes boot{0%{filter:drop-shadow(0 0 0 #bfefff)}25%{filter:drop-shadow(0 0 10px #dff6ff) brightness(2)}100%{filter:drop-shadow(0 0 3px var(--accent))}}
-#kv{position:fixed;top:max(10px, env(safe-area-inset-top, 0px));left:50%;transform:translateX(-50%);z-index:8;pointer-events:none;
+#kv{position:fixed;top:calc(max(10px, env(safe-area-inset-top, 0px)) + 20px);left:50%;transform:translateX(-50%);z-index:8;pointer-events:none;
   font-family:var(--f-num);font-weight:700;font-size:12px;letter-spacing:.04em;direction:ltr;padding:3px 10px;border-radius:999px;
   color:color-mix(in srgb,var(--fg) 70%,transparent);border:1px solid color-mix(in srgb,var(--fg) 28%,transparent);background:var(--bg);transition:color .6s,border-color .6s,box-shadow .6s}
 #kv.on{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 70%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 25%,transparent)}
@@ -290,7 +285,7 @@ header.top h1,header.top p{text-shadow:none}
 
 /* app shell: header and dock stay fixed, only this box scrolls, no rubber-band on the page */
 html,body{height:100%;overflow:hidden;overscroll-behavior:none;background-color:var(--bg)}
-.scroller{position:fixed;inset:0;bottom:calc(0px - var(--vgap,0px));z-index:2;will-change:scroll-position;overflow-y:auto;overflow-x:hidden;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
+.scroller{position:fixed;inset:0;z-index:2;overflow-y:auto;overflow-x:hidden;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
 
 /* missing required fields */
 #nav-next.dim{opacity:.55}
@@ -303,7 +298,11 @@ html,body{height:100%;overflow:hidden;overscroll-behavior:none;background-color:
 .exrow{padding:4px 0 8px;border-bottom:1px solid var(--hair)}
 .exrow:last-child{border-bottom:0}
 .exins{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;color:var(--muted);padding:2px 2px 0}
-.card,.hero,.dhero,.note{contain:paint}
+.dock::before{content:"";position:absolute;left:0;right:0;top:-26px;bottom:0;z-index:0;pointer-events:none;
+  background:linear-gradient(to bottom,color-mix(in srgb,var(--bg) 0%,transparent) 0,color-mix(in srgb,var(--bg) 72%,transparent) 45%,color-mix(in srgb,var(--bg) 92%,transparent) 100%);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 40%);mask-image:linear-gradient(to bottom,transparent 0,#000 40%)}
+.dock-in{position:relative;z-index:1}
 .disclaimer{text-align:center;color:var(--muted);font-size:12px;margin:18px 0 0}
 header.top .en p{font-family:var(--f-num);font-size:14px;margin-top:4px}
 header.top p.ar{margin:0 0 3px;font-size:14px}
@@ -458,7 +457,7 @@ table.slip{width:100%;border-collapse:collapse;font-size:14px}
 .delta.down{background:var(--neg-soft);color:var(--neg)}
 
 /* Dock */
-.dock{position:fixed;left:0;right:0;bottom:calc(0px - var(--vgap,0px));z-index:6;padding-left:max(12px, env(safe-area-inset-left, 0px));padding-right:max(12px, env(safe-area-inset-right, 0px));padding-top:8px;padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px))}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:6;padding-left:max(12px, env(safe-area-inset-left, 0px));padding-right:max(12px, env(safe-area-inset-right, 0px));padding-top:8px;padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px))}
 .dock-in{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px;border-radius:22px}
 .navbtn{font:inherit;font-weight:600;border:0;border-radius:15px;padding:12px 16px;min-width:100px;cursor:pointer;background:var(--fill);color:var(--fg);display:inline-flex;gap:6px;align-items:center;justify-content:center;transition:opacity .25s,transform .2s}
 .navbtn:active{transform:scale(.97)}
@@ -900,16 +899,8 @@ const hap=(()=>{let lab=null;return function(){
 document.querySelectorAll('.sw input').forEach(i=>i.setAttribute('switch',''));
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.seg button,.step button,.preset,.bigbtn,.navbtn,.resetbtn,.steps button,.addbtn,.ded button');
   if(b&&!b.disabled) hap();},true);
-/* iOS standalone viewport repair (WebKit 297779): measure the missing strip and push the fixed bars down into it */
-function fixViewport(){
-  const standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
-  let gap=0; if(standalone){ const g=Math.round(screen.height-window.innerHeight); if(g>8&&g<140) gap=g; }
-  document.documentElement.style.setProperty('--vgap',gap+'px');
-}
-fixViewport();
-addEventListener('resize',fixViewport); addEventListener('orientationchange',()=>setTimeout(fixViewport,300));
-if(window.visualViewport) visualViewport.addEventListener('resize',fixViewport);
-document.addEventListener('focusout',()=>setTimeout(()=>{try{window.scrollTo(0,0);}catch(e){} fixViewport();},300));
+/* after a picker or keyboard closes on iOS, settle the page back in place */
+document.addEventListener('focusout',()=>setTimeout(()=>{try{window.scrollTo(0,0);}catch(e){}},300));
 /* ---------- Navigation ---------- */
 function toTop(){ // instant, and on every possible scroller (the page may sit inside a host frame)
   try{window.scrollTo(0,0);}catch(e){}
@@ -1094,7 +1085,7 @@ const GRID=(function(){
   function layout(){
     const tb=$('topbar'), nav=tb.querySelector('.steps');
     const topH=tb.offsetHeight; document.documentElement.style.setProperty('--topH',topH+'px');
-    const sh=Math.round(nav.getBoundingClientRect().top+2); document.documentElement.style.setProperty('--sceneH',sh+'px');
+    const sh=Math.round(nav.getBoundingClientRect().top-30); // ground line sits above the title row document.documentElement.style.setProperty('--sceneH',sh+'px');
     DPR=Math.min(2,devicePixelRatio||1); W=innerWidth; H=sh+40;
     cv.width=W*DPR; cv.height=H*DPR; cv.style.width=W+'px'; cv.style.height=H+'px'; cx.setTransform(DPR,0,0,DPR,0,0);
     const svg=scene.querySelector('svg'); M=svg.getScreenCTM();
@@ -1263,7 +1254,6 @@ function drawP(p,x,y,alpha){
 }
 function frame(t){
   if(!running) return;
-  if(performance.now()<scrollQuiet){ lastT=t; requestAnimationFrame(frame); return; } // hold still while the list scrolls
   const dt=Math.min(.05,(t-(lastT||t))/1000); lastT=t;
   ctx.clearRect(0,0,W,H);
   for(const p of parts){p.y+=p.vy*dt;p.ph+=dt*.55;p.rot+=p.vr*dt;p.fl+=p.vf*dt;if(p.y<-50)Object.assign(p,mk(H+50));drawP(p,p.x+Math.sin(p.ph)*p.amp,p.y,p.a);}
@@ -1277,8 +1267,6 @@ function burst(el){
   for(let i=0;i<8;i++){const p=mk();p.x=r.left+r.width*(.2+Math.random()*.6);p.y=r.top+r.height/2;p.vx=(Math.random()-.5)*130;p.vy=-(60+Math.random()*90);p.vr=(Math.random()-.5)*2.5;p.life=p.max=1.4+Math.random()*.7;bursts.push(p);}
 }
 function startMotion(){ if(RM.matches){running=false;ctx.clearRect(0,0,W,H);parts.forEach(p=>drawP(p,p.x,p.y,p.a));return;} if(!running){running=true;lastT=0;requestAnimationFrame(frame);} }
-let scrollQuiet=0;
-{const sc=document.getElementById('scroller'); if(sc) sc.addEventListener('scroll',()=>{scrollQuiet=performance.now()+220;},{passive:true});}
 buildSprites(); resize(); seed(); startMotion();
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>GRID.build());
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{buildSprites();parts.forEach(p=>p.sp=pick());if(RM.matches)startMotion();});
